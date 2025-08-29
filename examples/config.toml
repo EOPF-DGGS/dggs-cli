@@ -1,0 +1,37 @@
+
+[operations]
+download_data = true
+
+[download_data]
+bucket_name = "okihle-s2l1b"
+endpoint = "https://pangeo-eosc-minioapi.vm.fedcloud.eu"
+objects = [
+    { path = "Sentinel-2/MSI/MSI_L1B_GR/2025/07/24/S2A_OPER_MSI_L1B_GR_2APS_20250724T011636_S20250724T000406_D03_N05.11.tar", is_dir = false },
+]
+output_folder = "data"
+
+
+[log]
+version = 1
+disable_existing_loggers = false
+
+[log.formatters.detailed]
+format = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+[log.handlers.console]
+class = "logging.StreamHandler"
+level = "INFO"
+formatter = "detailed"
+stream = "ext://sys.stdout"
+
+[log.handlers.file]
+class = "logging.handlers.RotatingFileHandler"
+level = "DEBUG"
+formatter = "detailed"
+filename = "app.log"
+maxBytes = 10485760
+backupCount = 3
+
+[log.loggers.dggs_cli]
+level = "DEBUG"
+handlers = ["console", "file"]
